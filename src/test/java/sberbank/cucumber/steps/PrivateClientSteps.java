@@ -18,7 +18,7 @@ public class PrivateClientSteps {
         privateClientPage.clickInNavigation(menuItem);
     }
 
-    @Step("Нахать '{dropDownMenuItem}' в выпадающем меню")
+    @Step("Нажать '{dropDownMenuItem}' в выпадающем меню")
     public void selectInDropdownMenu(String dropDownMenuItem) {
         privateClientPage.clickDropdownLink(dropDownMenuItem);
     }

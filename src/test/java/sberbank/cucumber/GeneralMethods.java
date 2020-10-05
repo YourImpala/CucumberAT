@@ -27,8 +27,10 @@ public class GeneralMethods {
 
     public static  void moveToElement(WebDriver driver, WebElement element) {
         Actions action = new Actions(driver);
-        action.moveToElement(element);
-        action.perform();
+        action
+                .moveToElement(element)
+                .build()
+                .perform();
     }
 
     @Attachment

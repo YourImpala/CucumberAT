@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import sberbank.cucumber.GeneralMethods;
-import sberbank.cucumber.settings.WebDriverSettings;
+import sberbank.cucumber.steps.Hooks;
 
 
 import java.util.HashMap;
@@ -55,7 +55,7 @@ public class FormTravelInsurancePage {
     WebElement errorMessage;
 
     public FormTravelInsurancePage() {
-        PageFactory.initElements(WebDriverSettings.getDriver(), this);
+        PageFactory.initElements(Hooks.getDriver(), this);
 
         fieldLocators.put("застрахованные_фамилия", insuredName);
         fieldLocators.put("застрахованные_имя", insuredSurname);
@@ -82,7 +82,7 @@ public class FormTravelInsurancePage {
     }
 
     public void clickContinueBtn() {
-        GeneralMethods.moveToElementAndClick(WebDriverSettings.getDriver(), continueBtn);
+        GeneralMethods.moveToElementAndClick(Hooks.getDriver(), continueBtn);
     }
 
     public String getErrorText() {

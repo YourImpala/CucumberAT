@@ -4,20 +4,25 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import io.cucumber.datatable.DataTable;
 import sberbank.cucumber.GeneralMethods;
-import sberbank.cucumber.settings.WebDriverSettings;
 
+public class CucumberSteps {
 
-public class CucumberSteps extends WebDriverSettings {
-
-    PrivateClientSteps privateClientSteps = new PrivateClientSteps(driver);
-    TravelIsuranceSteps travelIsuranceSteps = new TravelIsuranceSteps();
-    ChoosePolicyTravelInsuranceSteps choosePolicyTravelInsuranceSteps = new ChoosePolicyTravelInsuranceSteps(driver);
-    FormTravelInsuranceSteps formTravelInsuranceSteps = new FormTravelInsuranceSteps(driver);
+    PrivateClientSteps privateClientSteps;
+    InsureMainSteps insureMainSteps;
+    TravelIsuranceSteps travelIsuranceSteps;
+    ChoosePolicyTravelInsuranceSteps choosePolicyTravelInsuranceSteps;
+    FormTravelInsuranceSteps formTravelInsuranceSteps;
 
     @Given("Перейти на сайт '(.*)'")
     public void перейти_на_сайт(String url) {
-        startBrowser();
-        driver.get(url);
+        Hooks.getDriver().get(url);
+
+        privateClientSteps = new PrivateClientSteps(Hooks.getDriver());
+        insureMainSteps = new InsureMainSteps(Hooks.getDriver());
+        travelIsuranceSteps = new TravelIsuranceSteps();
+        choosePolicyTravelInsuranceSteps = new ChoosePolicyTravelInsuranceSteps(Hooks.getDriver());
+        formTravelInsuranceSteps = new FormTravelInsuranceSteps(Hooks.getDriver());
+
     }
 
     @Then("Нажать на пункт навигации '(.*)'")
@@ -30,13 +35,23 @@ public class CucumberSteps extends WebDriverSettings {
         privateClientSteps.selectInDropdownMenu(dropdownItemName);
     }
 
+    @Then("Нажать на кнопку 'оформить онлайн' в блоке страховки")
+    public void нажать_на_оформить_онлайн() {
+        insureMainSteps.applyOnlineInsurance();
+    }
+
+    @Then("Проверить открытие вкладки '(.*)'")
+    public void проверить_открытие_вкладки(String pageTitleName) {
+        insureMainSteps.checkNewTab(pageTitleName);
+    }
+
     @Then("Проверить наличие на странице заголовка '(.*)'")
     public void проверить_наличие_на_странице_заголовка(String titleName) {
         travelIsuranceSteps.checkTitle(titleName);
     }
 
     @Then("Нажать на кнопку Оформить Онлайн")
-    public void нажать_на_кнопку_оформить_онлайн() {
+    public void нажать_на_кнопку_оформить_онлайн() throws InterruptedException {
         travelIsuranceSteps.clickIssueOnlineButton();
     }
 

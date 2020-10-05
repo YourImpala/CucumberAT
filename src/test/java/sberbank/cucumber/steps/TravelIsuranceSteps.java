@@ -2,10 +2,11 @@ package sberbank.cucumber.steps;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import sberbank.cucumber.GeneralMethods;
 import sberbank.cucumber.pageObjects.TravelInsurancePage;
-import sberbank.cucumber.settings.WebDriverSettings;
+
+import java.util.List;
 
 public class TravelIsuranceSteps {
 
@@ -17,16 +18,17 @@ public class TravelIsuranceSteps {
 
     @Step("Наличие на странице заголовка – {titleText}")
     public void checkTitle(String titleText) {
-        if(travelInsurancePage.checkTravelInsuranceTitle(titleText)) {
+        List<WebElement> titles = travelInsurancePage.getTitles(titleText);
+        if(titles.size() >= 1) {
             Assertions.assertTrue(true);
         } else {
-            GeneralMethods.getScreenshot(WebDriverSettings.getDriver());
+            GeneralMethods.getScreenshot(Hooks.getDriver());
             Assertions.assertTrue(false, "Заголовок - " + titleText + " не найден");
         }
     }
 
     @Step("Нажать кнопку 'Оформить онлайн'")
     public void clickIssueOnlineButton() {
-        travelInsurancePage.clickIssueOnlineButton();
+        travelInsurancePage.clickApplyOnline();
     }
 }

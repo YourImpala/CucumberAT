@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         strict = true,
         plugin = {"io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm", "pretty", "json:target/cucumber-report/report.json"},
         features="src/test/java/sberbank/cucumber/features",
-        glue = "sberbank.cucumber.steps"
+        glue = {"sberbank.cucumber.steps", "sberbank.cucumber.hooks"}
 )
 public class CucumberRunner {
 

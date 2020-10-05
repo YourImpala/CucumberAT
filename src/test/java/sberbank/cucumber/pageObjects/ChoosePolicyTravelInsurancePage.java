@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import sberbank.cucumber.GeneralMethods;
-import sberbank.cucumber.settings.WebDriverSettings;
+import sberbank.cucumber.steps.Hooks;
 
 
 public class ChoosePolicyTravelInsurancePage {
@@ -19,7 +19,7 @@ public class ChoosePolicyTravelInsurancePage {
 
 
     public ChoosePolicyTravelInsurancePage() {
-        PageFactory.initElements(WebDriverSettings.getDriver(), this);
+        PageFactory.initElements(Hooks.getDriver(), this);
     }
 
     public boolean isSelected(String cardName) {
@@ -36,7 +36,7 @@ public class ChoosePolicyTravelInsurancePage {
     }
 
     public void clicktakeOutInsuranceBtn() {
-        GeneralMethods.moveToElementAndClick(WebDriverSettings.getDriver(), takeOutInsuranceBtn);
+        GeneralMethods.moveToElementAndClick(Hooks.getDriver(), takeOutInsuranceBtn);
     }
 
 

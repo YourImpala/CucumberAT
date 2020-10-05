@@ -1,20 +1,20 @@
 package sberbank.cucumber.pageObjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import sberbank.cucumber.settings.WebDriverSettings;
+import sberbank.cucumber.steps.Hooks;
+
 
 public class PrivateClientPage {
 
-    @FindBy(xpath = "//ul[@class='kitt-top-menu__list  kitt-top-menu__list_left']")
+    @FindBy(xpath = "//ul[@class='kitt-top-menu__list  kitt-top-menu__list_center']")
     WebElement navigation;
 
 
     public PrivateClientPage() {
-        PageFactory.initElements(WebDriverSettings.getDriver(), this);
+        PageFactory.initElements(Hooks.getDriver(), this);
 
     }
 

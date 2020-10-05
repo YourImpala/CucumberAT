@@ -1,21 +1,16 @@
-package sberbank.cucumber.settings;
+package sberbank.cucumber.steps;
 
-import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import cucumber.api.java.BeforeStep;
-import io.qameta.allure.Step;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.TestInstance;
+import cucumber.api.java.After;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import sberbank.cucumber.settings.TestProperties;
 
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-@TestInstance(TestInstance.Lifecycle.PER_METHOD)
-public class WebDriverSettings {
+public class Hooks {
     public static WebDriver driver;
     public static Properties properties = TestProperties.getInstance().getProperties();
     public static String baseURL;
@@ -23,9 +18,8 @@ public class WebDriverSettings {
     public static WebDriver getDriver(){
         return driver;
     }
-
-    @Step
-    public static void startBrowser(){
+    @Before
+    public void startBrowser(){
         switch (properties.getProperty("browser")){
             case "firefox":
                 System.setProperty("webdriver.gecko.driver", properties.getProperty("webdriver.gecko.driver"));
@@ -45,10 +39,11 @@ public class WebDriverSettings {
         driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 
         baseURL = properties.getProperty("app.url");
+
     }
 
-    @Step
-    public static void closeBrowser(){
+    @After
+    public static void tearDown() throws Exception {
         driver.quit();
     }
 }
